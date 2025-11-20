@@ -23,7 +23,14 @@ useHead({
 
 const car = computed(() => {
   return cars.find(car => car.id == parseInt(route.params.id));
-})
+});
+
+if(!car.value){
+  throw createError({
+    statusCode: 404,
+    message: `Car not found. Car with id of ${route.params.id} does not exist`
+  })
+}
 
 definePageMeta({
   layout: "custom"
